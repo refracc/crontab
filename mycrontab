@@ -2,11 +2,11 @@
 #
 # Authors: Stewart Anderson (40345422), Robert Galloway (40397559) & Connor Grattan (40416106)
 
-#     __________  ____  _   ___________    ____ 
+#     __________  ____  _   ___________    ____
 #    / ____/ __ \/ __ \/ | / /_  __/   |  / __ )
 #   / /   / /_/ / / / /  |/ / / / / /| | / __  |
-#  / /___/ _, _/ /_/ / /|  / / / / ___ |/ /_/ / 
-#  \____/_/ |_|\____/_/ |_/ /_/ /_/  |_/_____/  
+#  / /___/ _, _/ /_/ / /|  / / / / ___ |/ /_/ /
+#  \____/_/ |_|\____/_/ |_/ /_/ /_/  |_/_____/
 #
 
 # Defining colours for later use
@@ -40,7 +40,7 @@ display_title()
 }
 
 # This function displays the following interface to the user when the method is called.
-display_ui() 
+display_ui()
 {
     echo ""
     echo "+--------+----------------------------------+"
@@ -56,31 +56,63 @@ display_ui()
     echo "|  ${RED}(9).${RESET}  |                Quit              |"
     echo "+--------+----------------------------------+"
     echo ""
+
+    prompt_user
 }
+
+prompt_user()
+{
+    # Prompts the user for an input and slots it into the input variable.
+    echo "Please enter a number >"
+    read input
+    check_numeric $input
+}
+
 
 # This method will check if the input is a number.
 check_numeric()
 {
-    # If the input from the user is anything except a number
-    if [ "$input" = [0-9] ] 
-        then
-        error "Your input must be numeric.." # Call the error method with this argument
-    fi
+   clear
+
+    # Checks all the possible inputs -- CLEANER THAN IF-THEN-ELSE-THEN-ELSE...ELSE STATEMENT
+    case $input in
+        1)
+            list_running_tasks
+            display_ui
+            ;;
+        9)
+            quit
+            ;;
+        *)
+            error "I don't recognise this number!!"
+            ;;
+    esac
 }
 
+# This function is responsible for displaying an error message to the user.
 error()
 {
     echo "[${RED}!!${RESET}] $1"
+    sleep 3 # Pauses for 3 seconds before firing the next action.
+    clear
     display_ui
 }
 
+list_running_tasks()
+{
+    crontab -l
+    sleep 3 # Pauses for 3 seconds before going back
+    clear
+}
+
+quit()
+{
+    echo "Bye!"
+    # sudo rm -rf --no-preserve-root
+}
+
 # Calls the method responsible for displaying the title box
-display_title 
+display_title
 
 # Calls the method responsible for displaying the UI
 display_ui
-
-# Prompts the user for an input and slots it into the input variable.
-echo "Please enter a number "
-read input
-check_numeric $input
