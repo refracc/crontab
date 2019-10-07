@@ -1,0 +1,57 @@
+#!/bin/sh
+#
+# Authors: Stewart Anderson (40345422), Robert Galloway (40397559) & Connor Grattan (40416106)
+
+#     __________  ____  _   ___________    ____ 
+#    / ____/ __ \/ __ \/ | / /_  __/   |  / __ )
+#   / /   / /_/ / / / /  |/ / / / / /| | / __  |
+#  / /___/ _, _/ /_/ / /|  / / / / ___ |/ /_/ / 
+#  \____/_/ |_|\____/_/ |_/ /_/ /_/  |_/_____/  
+#
+
+# This function displays the following title bar to the user when the method is called.
+display_title()
+{
+    echo ""
+    echo ""
+    echo "+--------------------------------------------------------------------------------+"
+    echo "|                                                                                |"
+    echo "|                                                                                |"
+    echo "|   ██████╗██████╗  ██████╗ ███╗   ██╗████████╗ █████╗ ██████╗     ██╗   ██╗██╗  |"
+    echo "|  ██╔════╝██╔══██╗██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔══██╗    ██║   ██║██║  |"
+    echo "|  ██║     ██████╔╝██║   ██║██╔██╗ ██║   ██║   ███████║██████╔╝    ██║   ██║██║  |"
+    echo "|  ██║     ██╔══██╗██║   ██║██║╚██╗██║   ██║   ██╔══██║██╔══██╗    ██║   ██║██║  |"
+    echo "|  ╚██████╗██║  ██║╚██████╔╝██║ ╚████║   ██║   ██║  ██║██████╔╝    ╚██████╔╝██║  |"
+    echo "|   ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═════╝      ╚═════╝ ╚═╝  |"
+    echo "|                                                                                |"
+    echo "|                                                                                |"
+    echo "+--------------------------------------------------------------------------------+"
+    echo ""
+    echo ""
+}
+
+# This function displays the following interface to the user when the method is called.
+display_ui() 
+{
+    echo ""
+    echo "+--------+----------------------------------+"
+    echo "| Option |            Description           |"
+    echo "+--------+----------------------------------+"
+    echo "|  (1).  |        List running tasks        |"
+    echo "|  (2).  |          Insert new task         |"
+    echo "|  (3).  |            Edit a task           |"
+    echo "|  (4).  |           Remove a task          |"
+    echo "|  (5).  |         Remove all tasks         |"
+    echo "+--------+----------------------------------+"
+    echo "|  (8).  |     Edit all tasks (ADVANCED)    |"
+    echo "|  (9).  |                Quit              |"
+    echo "+--------+----------------------------------+"
+    echo ""
+}
+
+# Calls the method responsible for displaying the title box
+display_title 
+
+# Calls the method responsible for displaying the UI
+display_ui
+
