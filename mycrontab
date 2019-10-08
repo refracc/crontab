@@ -80,6 +80,14 @@ check_numeric()
             list_running_tasks
             display_ui
             ;;
+        5)
+            remove_cron_job
+            display_ui
+            ;;
+        8)
+            edit_cron_jobs
+            display_ui
+            ;;
         9)
             quit
             ;;
@@ -102,6 +110,20 @@ list_running_tasks()
 {
     crontab -l
     sleep 3 # Pauses for 3 seconds before going back
+    clear
+}
+
+edit_cron_jobs()
+{
+    crontab -e
+    sleep 3
+    clear
+}
+
+remove_cron_job()
+{
+    crontab -r
+    sleep 3
     clear
 }
 
