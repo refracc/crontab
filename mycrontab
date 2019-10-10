@@ -80,6 +80,10 @@ check_numeric()
             list_running_tasks
             display_ui
             ;;
+	4)
+	    remove_task
+	    display_ui
+	    ;;
         5)
             remove_cron_job
             display_ui
@@ -110,6 +114,19 @@ list_running_tasks()
 {
     crontab -l
     sleep 3 # Pauses for 3 seconds before going back
+    clear
+}
+
+remove_task()
+{
+    if [ -z "$2" ]; then
+            usage >&2
+            exit 1
+        fi
+
+        crontab -l | sed -e "$2d" >crontab.tmp
+        crontab crontab.tmp && rm -f crontab.tmp
+    sleep 3
     clear
 }
 
