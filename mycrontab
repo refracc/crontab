@@ -115,25 +115,25 @@ error()
     echo "[${RED}!!${RESET}] $1"
     sleep 3 # Pauses for 3 seconds before firing the next action.
     clear
-    display_ui
 }
 
+# This function is responsible for displaying all of the currnet running tasks to the user
 list_running_tasks()
 {
     crontab -l
     sleep 3 # Pauses for 3 seconds before going back
     clear
-    display_ui
 }
 
+# This function is to let the user edit an individual task
 edit_task()
 {
     echo "TASK 3"
     sleep 3
     clear
-    display_ui    
 }
 
+# This function is to let the user insert a specific task
 insert_task()
 {
     echo "Please enter a task to run"
@@ -141,9 +141,9 @@ insert_task()
     crontab -l ; echo "$task" | crontab -
     sleep 3
     clear
-    dislpay_ui
 }
 
+# This function is to let the user delete a specific task
 remove_task()
 {
     crontab -l
@@ -152,25 +152,25 @@ remove_task()
     crontab -l | grep -v '$task' | crontab -
     sleep 3
     clear
-    display_ui
 }
 
+# This function is to let the user edit all of the tasks
 edit_cron_jobs()
 {
     crontab -e
     sleep 3
     clear
-    display_ui
 }
 
+# This function allows the user to delete all current tasks
 remove_cron_job()
 {
     crontab -r
     sleep 3
     clear
-    display_ui
 }
 
+# This function allows the user to exit the program
 quit()
 {
     echo "Bye!"
