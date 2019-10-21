@@ -143,6 +143,73 @@ insert_task()
     clear
 }
 
+new_insert_task()
+{
+    task=""
+    echo "+--------------+------------- +"
+    echo "| Legal Values | Descrtiption |"
+    echo "+--------------+--------------+"
+    echo "|      0       |  On the hour |"
+    echo "|     1-59     |    Minutes   |"
+    echo "|      *       | Every minute |"
+    echo "+--------------+--------------+"
+
+    echo "\n\nOn what minute(s) would you like the task to execute?"
+    read minutes
+    task="$task $minutes"
+
+    sleep 3
+    clear
+
+    echo "+--------------+------------- +"
+    echo "| Legal Values | Descrtiption |"
+    echo "+--------------+--------------+"
+    echo "|      0       |  On the day  |"
+    echo "|     0-23     |     Hours    |"
+    echo "|      *       |  Every hour  |"
+    echo "+--------------+--------------+"
+
+    echo "\n\nOn what hour(s) would you like the task to execute?"
+    read hours
+    task="$task $hours"
+
+    sleep 3
+    clear
+
+    echo "+--------------+--------------+"
+    echo "| Legal Values | Descrtiption |"
+    echo "+--------------+--------------+"
+    echo "|      0       | On the month |"
+    echo "|     1-31     |     Days     |"
+    echo "|      *       |   Every day  |"
+    echo "+--------------+--------------+"
+
+    echo "\n\nOn what day(s) would you like the task to execute?"
+    read days
+    task="$task $days"
+
+    sleep 3
+    clear
+
+    echo "+--------------+--------------+"
+    echo "| Legal Values | Descrtiption |"
+    echo "+--------------+--------------+"
+    echo "|      0       | On the year  |"
+    echo "|     1-12     |    Months    |"
+    echo "|      *       | Every month  |"
+    echo "+--------------+--------------+"
+
+    echo "\n\nOn what month(s) would you like the task to execute?"
+    read months
+    task="$task $months"
+
+    sleep 3
+    clear
+
+    
+
+}
+
 # This function is to let the user delete a specific task
 remove_task()
 {
