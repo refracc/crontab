@@ -215,7 +215,7 @@ insert_task()
 
     clear
     echo $task
-    cat -v /etc/crontab
+
     echo "$(echo '$task' ; crontab -l)" | crontab -
 
     # crontab -l 2>/dev/null; echo "$task" | crontab -
