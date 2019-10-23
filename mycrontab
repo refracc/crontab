@@ -136,15 +136,6 @@ edit_task()
 # This function is to let the user insert a specific task
 insert_task()
 {
-    echo "Please enter a task to run"
-    read task
-    crontab -l ; echo "$task" | crontab -
-    sleep 3
-    clear
-}
-
-new_insert_task()
-{
     task=""
     echo "+--------------+------------- +"
     echo "| Legal Values | Descrtiption |"
@@ -158,7 +149,6 @@ new_insert_task()
     read minutes
     task="$task $minutes"
 
-    sleep 3
     clear
 
     echo "+--------------+------------- +"
@@ -173,7 +163,6 @@ new_insert_task()
     read hours
     task="$task $hours"
 
-    sleep 3
     clear
 
     echo "+--------------+--------------+"
@@ -188,7 +177,6 @@ new_insert_task()
     read days
     task="$task $days"
 
-    sleep 3
     clear
 
     echo "+--------------+--------------+"
@@ -203,6 +191,34 @@ new_insert_task()
     read months
     task="$task $months"
 
+    clear
+
+    echo "+--------------+--------------+"
+    echo "| Legal Values | Descrtiption |"
+    echo "+--------------+--------------+"
+    echo "|      0       |    Sunday    |"
+    echo "|     1-6     |   Mon-Sat    |"
+    echo "|      *       |  Every day   |"
+    echo "+--------------+--------------+"
+
+    echo "\n\nOn what day(s) of the week would you like the task to execute?"
+    read day
+    task="$task $day"
+
+    clear
+
+    echo "Enter a command: "
+    read command
+    task="$task $command"
+
+    task = "$(echo -e "${task}" | sed -e 's/^[[:space:]]*//')"
+
+    clear
+    echo $task
+    cat -v /etc/crontab
+    echo "$(echo '$task' ; crontab -l)" | crontab -
+
+    # crontab -l 2>/dev/null; echo "$task" | crontab -
     sleep 3
     clear
 
@@ -225,7 +241,7 @@ remove_task()
 edit_cron_jobs()
 {
     crontab -e
-    sleep 3
+    sleep 1
     clear
 }
 
