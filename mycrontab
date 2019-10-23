@@ -63,7 +63,7 @@ display_ui()
 prompt_user()
 {
     # Prompts the user for an input and slots it into the input variable.
-    echo "Please enter a number >"
+    echo "Please enter a number"
     read input
     check_numeric $input
 }
@@ -105,6 +105,7 @@ check_numeric()
             ;;
         *)
             error "I don't recognise this number!!"
+            display_ui
             ;;
     esac
 }
@@ -138,7 +139,7 @@ insert_task()
 {
     task=""
     echo "+--------------+------------- +"
-    echo "| Legal Values | Descrtiption |"
+    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
     echo "+--------------+--------------+"
     echo "|      0       |  On the hour |"
     echo "|     1-59     |    Minutes   |"
@@ -152,7 +153,7 @@ insert_task()
     clear
 
     echo "+--------------+------------- +"
-    echo "| Legal Values | Descrtiption |"
+    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
     echo "+--------------+--------------+"
     echo "|      0       |  On the day  |"
     echo "|     0-23     |     Hours    |"
@@ -166,7 +167,7 @@ insert_task()
     clear
 
     echo "+--------------+--------------+"
-    echo "| Legal Values | Descrtiption |"
+    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
     echo "+--------------+--------------+"
     echo "|      0       | On the month |"
     echo "|     1-31     |     Days     |"
@@ -180,7 +181,7 @@ insert_task()
     clear
 
     echo "+--------------+--------------+"
-    echo "| Legal Values | Descrtiption |"
+    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
     echo "+--------------+--------------+"
     echo "|      0       | On the year  |"
     echo "|     1-12     |    Months    |"
@@ -194,10 +195,10 @@ insert_task()
     clear
 
     echo "+--------------+--------------+"
-    echo "| Legal Values | Descrtiption |"
+    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
     echo "+--------------+--------------+"
     echo "|      0       |    Sunday    |"
-    echo "|     1-6     |   Mon-Sat    |"
+    echo "|     1-6      |   Mon-Sat    |"
     echo "|      *       |  Every day   |"
     echo "+--------------+--------------+"
 
@@ -214,11 +215,12 @@ insert_task()
     task = "$(echo -e "${task}" | sed -e 's/^[[:space:]]*//')"
 
     clear
-    echo $task
 
-    echo "$(echo '$task' ; crontab -l)" | crontab -
+    crontab -l > output.txt 
+    echo "$task" >> output.txt 
+    crontab output.txt
+    rm -f output.txt
 
-    # crontab -l 2>/dev/null; echo "$task" | crontab -
     sleep 3
     clear
 
