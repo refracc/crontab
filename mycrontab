@@ -74,7 +74,7 @@ check_numeric()
 {
    clear
 
-    # Checks all the possible inputs -- CLEANER THAN IF-THEN-ELSE-THEN-ELSE...ELSE STATEMENT
+    # Checks all the possible inputs -- CLEANER THAN IF-THEN-ELSEIF-THEN-ELSEIF...ELSE STATEMENT
     case $input in
         1)
             list_running_tasks
@@ -155,7 +155,6 @@ insert_task()
     echo "+--------------+------------- +"
     echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
     echo "+--------------+--------------+"
-    echo "|      0       |  On the day  |"
     echo "|     0-23     |     Hours    |"
     echo "|      *       |  Every hour  |"
     echo "+--------------+--------------+"
@@ -169,7 +168,6 @@ insert_task()
     echo "+--------------+--------------+"
     echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
     echo "+--------------+--------------+"
-    echo "|      0       | On the month |"
     echo "|     1-31     |     Days     |"
     echo "|      *       |   Every day  |"
     echo "+--------------+--------------+"
@@ -183,7 +181,6 @@ insert_task()
     echo "+--------------+--------------+"
     echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
     echo "+--------------+--------------+"
-    echo "|      0       | On the year  |"
     echo "|     1-12     |    Months    |"
     echo "|      *       | Every month  |"
     echo "+--------------+--------------+"
@@ -223,9 +220,6 @@ insert_task()
 
     sleep 3
     clear
-
-    
-
 }
 
 # This function is to let the user delete a specific task
