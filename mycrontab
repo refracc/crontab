@@ -225,12 +225,16 @@ insert_task()
 # This function is to let the user delete a specific task
 remove_task()
 {
+    crontab -l > output.txt
     crontab -l
-    echo "Which task would you like to remove"
-    read task
-    crontab -l | grep -v '$task' | crontab -
+    echo "Which task would you like to delete: "
+    read line
+    sed '' '$line'd ./output.txt
+    crontab output.txt
+    rm -f output.txt
+
     sleep 3
-    clear
+    clear    
 }
 
 # This function is to let the user edit all of the tasks
