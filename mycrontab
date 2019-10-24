@@ -129,9 +129,16 @@ list_running_tasks()
 # This function is to let the user edit an individual task
 edit_task()
 {
-    echo "TASK 3"
-    sleep 3
-    clear
+    crontab -l
+    echo "Which task would you like to edit: "
+    read line
+
+    crontab -l > output.txt
+    sed -i.bak -e "${line}d" output.txt
+    crontab output.txt
+    rm -f output.txt
+
+    insert_task
 }
 
 # This function is to let the user insert a specific task
@@ -218,6 +225,8 @@ insert_task()
     crontab output.txt
     rm -f output.txt
 
+    crontab -l
+
     sleep 3
     clear
 }
@@ -225,13 +234,15 @@ insert_task()
 # This function is to let the user delete a specific task
 remove_task()
 {
-    crontab -l > output.txt
     crontab -l
     echo "Which task would you like to delete: "
     read line
-    sed '' '$line'd ./output.txt
+
+    crontab -l > output.txt
+    sed -i.bak -e "${line}d" output.txt
     crontab output.txt
     rm -f output.txt
+    rm -f *.bak
 
     sleep 3
     clear    
