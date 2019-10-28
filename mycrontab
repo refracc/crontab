@@ -21,6 +21,7 @@ input="0"
 # This function displays the following title bar to the user when the method is called.
 display_title()
 {
+    clear
     echo ""
     echo ""
     echo "+--------------------------------------------------------------------------------+"
@@ -234,7 +235,7 @@ insert_task()
 # This function is to let the user delete a specific task
 remove_task()
 {
-    crontab -l
+    crontab -l | grep -n
     echo "Which task would you like to delete: "
     read line
 
