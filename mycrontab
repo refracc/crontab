@@ -146,13 +146,21 @@ edit_task()
 #$1 Is the value to check
 #$2 Is the minimum legal value
 #$3 is the maximum legal value
+
 is_invalid()
 {
+if [[ ! -n ${1//[0-9]/} ]]; 
+then
+    return false
+else
+    input_error $2 $3
+fi    
 }
 
 #Outputs an illegal input error message
 #$1 is the minimum legal value
 #$2 is the maximum legal value
+
 input_error()
 {
     error "Illegal input, please enter a number between $1 and $2 or an asterisk"
@@ -172,11 +180,12 @@ insert_task()
 
     echo "\n\nOn what minute(s) would you like the task to execute?"
     read minutes
+
     #Begin input validation
     #While the input is invalid, display an error message and re-prompt for input
     while is_invalid "$minutes" 0 59
+
     do
-	    input_error 0 59
 	    echo "+--------------+------------- +"
 	    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
 	    echo "+--------------+--------------+"
@@ -208,7 +217,6 @@ insert_task()
     #While the input is invalid, display an error message and re-prompt for input
     while is_invalid $hours 0 23
     do
-	    input_error 0 23
 	    echo "+--------------+------------- +"
     	echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
     	echo "+--------------+--------------+"
@@ -239,7 +247,6 @@ insert_task()
     #While the input is invalid, display an error message and re-prompt for input
     while is_invalid $days 1 31
     do
-	    input_error 1 31
 	    echo "+--------------+--------------+"
 	    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
 	    echo "+--------------+--------------+"
@@ -270,7 +277,6 @@ insert_task()
     #While the input is invalid, display an error message and re-prompt for input
     while is_invalid $months 1 12
     do
-	    input_error 1 12
 	    echo "+--------------+--------------+"
 	    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
 	    echo "+--------------+--------------+"
@@ -302,7 +308,6 @@ insert_task()
     #While the input is invalid, display an error message and re-prompt for input
     while is_invalid $day 0 6
     do
-	    input_error 0 6
 	    echo "+--------------+--------------+"
 	    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
 	    echo "+--------------+--------------+"
