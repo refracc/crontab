@@ -142,6 +142,22 @@ edit_task()
     insert_task
 }
 
+#Input validation function for insert_task()
+#$1 Is the value to check
+#$2 Is the minimum legal value
+#$3 is the maximum legal value
+is_invalid()
+{
+}
+
+#Outputs an illegal input error message
+#$1 is the minimum legal value
+#$2 is the maximum legal value
+input_error()
+{
+    error "Illegal input, please enter a number between $1 and $2 or an asterisk"
+}
+
 # This function is to let the user insert a specific task
 insert_task()
 {
@@ -156,6 +172,24 @@ insert_task()
 
     echo "\n\nOn what minute(s) would you like the task to execute?"
     read minutes
+    #Begin input validation
+    #While the input is invalid, display an error message and re-prompt for input
+    while is_invalid "$minutes" 0 59
+    do
+	    input_error 0 59
+	    echo "+--------------+------------- +"
+	    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
+	    echo "+--------------+--------------+"
+	    echo "|      0       |  On the hour |"
+	    echo "|     1-59     |    Minutes   |"
+	    echo "|      *       | Every minute |"
+	    echo "+--------------+--------------+"
+
+	    echo "\n\nOn what minute(s) would you like the task to execute?"
+	    read minutes
+    done
+    #End input validation
+
     task="$task $minutes"
 
     clear
@@ -169,6 +203,24 @@ insert_task()
 
     echo "\n\nOn what hour(s) would you like the task to execute?"
     read hours
+
+    #Begin input validation
+    #While the input is invalid, display an error message and re-prompt for input
+    while is_invalid $hours 0 23
+    do
+	    input_error 0 23
+	    echo "+--------------+------------- +"
+    	echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
+    	echo "+--------------+--------------+"
+    	echo "|     0-23     |     Hours    |"
+  	    echo "|      *       |  Every hour  |"
+      	echo "+--------------+--------------+"
+
+    	echo "\n\nOn what hour(s) would you like the task to execute?"
+    	read hours
+    done
+    #End input validation
+
     task="$task $hours"
 
     clear
@@ -182,6 +234,24 @@ insert_task()
 
     echo "\n\nOn what day(s) would you like the task to execute?"
     read days
+
+    #Begin input validation
+    #While the input is invalid, display an error message and re-prompt for input
+    while is_invalid $days 1 31
+    do
+	    input_error 1 31
+	    echo "+--------------+--------------+"
+	    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
+	    echo "+--------------+--------------+"
+	    echo "|     1-31     |     Days     |"
+	    echo "|      *       |   Every day  |"
+	    echo "+--------------+--------------+"
+
+	    echo "\n\nOn what day(s) would you like the task to execute?"
+	    read days
+    done
+    #End input validation
+
     task="$task $days"
 
     clear
@@ -195,6 +265,24 @@ insert_task()
 
     echo "\n\nOn what month(s) would you like the task to execute?"
     read months
+
+    #Begin input validation
+    #While the input is invalid, display an error message and re-prompt for input
+    while is_invalid $months 1 12
+    do
+	    input_error 1 12
+	    echo "+--------------+--------------+"
+	    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
+	    echo "+--------------+--------------+"
+	    echo "|     1-12     |    Months    |"
+	    echo "|      *       | Every month  |"
+	    echo "+--------------+--------------+"
+
+	    echo "\n\nOn what month(s) would you like the task to execute?"
+	    read months
+    done
+    #End input validation
+
     task="$task $months"
 
     clear
@@ -209,6 +297,25 @@ insert_task()
 
     echo "\n\nOn what day(s) of the week would you like the task to execute?"
     read day
+
+    #Begin input validation
+    #While the input is invalid, display an error message and re-prompt for input
+    while is_invalid $day 0 6
+    do
+	    input_error 0 6
+	    echo "+--------------+--------------+"
+	    echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
+	    echo "+--------------+--------------+"
+	    echo "|      0       |    Sunday    |"
+	    echo "|     1-6      |   Mon-Sat    |"
+	    echo "|      *       |  Every day   |"
+	    echo "+--------------+--------------+"
+
+	    echo "\n\nOn what day(s) of the week would you like the task to execute?"
+	    read day
+    done
+    #End input validation
+
     task="$task $day"
 
     clear
@@ -235,7 +342,7 @@ insert_task()
 # This function is to let the user delete a specific task
 remove_task()
 {
-    crontab -l | grep -n
+    crontab -l | grep . -n
     echo "Which task would you like to delete: "
     read line
 
