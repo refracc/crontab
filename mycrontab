@@ -149,11 +149,11 @@ edit_task()
 
 is_invalid()
 {
-if [[ ! -n ${1//[0-9]/} ]]; 
+if [[ -n ${1//[0-9]/} ]] || [[ -z "$1" ]];
 then
-    return false
-else
     input_error $2 $3
+else
+    break
 fi    
 }
 
