@@ -161,9 +161,9 @@ then
 else
     if [ "$1" = "*" ]
     then
-        false
-    else
         true
+    else
+        false
     fi
 fi    
 }
