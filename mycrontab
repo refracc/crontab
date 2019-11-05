@@ -130,8 +130,8 @@ list_running_tasks()
 # This function is to let the user edit an individual task
 edit_task()
 {
-    crontab -l
-    echo "Which task would you like to edit: "
+    crontab -l | grep . -n
+    echo "Select which line containing the task would you like to edit: "
     read line
 
     crontab -l > output.txt
@@ -358,7 +358,7 @@ insert_task()
 remove_task()
 {
     crontab -l | grep . -n
-    echo "Which task would you like to delete: "
+    echo "Select which line conatining the task would you like to delete: "
     read line
 
     crontab -l > output.txt
