@@ -358,8 +358,7 @@ insert_task()
 remove_task()
 {
     crontab -l | grep . -n
-    
-    echo "Enter line number of which task you would like to delete: "
+    echo "Which task would you like to delete: "
     read line
 
     crontab -l > output.txt
