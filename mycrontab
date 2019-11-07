@@ -361,6 +361,13 @@ remove_task()
     echo "Select which line conatining the task would you like to delete: "
     read line
 
+    while [  $line | egrep -q '^[0-9]+$' ]
+    do
+        echo "Select which line conatining the task would you like to delete: "
+        read line
+    done
+
+
     crontab -l > output.txt
     sed -i.bak -e "${line}d" output.txt
     crontab output.txt
@@ -418,7 +425,7 @@ remove_cron_job()
 
 
     # Validation the user wishes to continue with wiping all cron jobs.
-    error "This will remove all current running crontab jobs. Are you sure you wish to continue? [y/n]"
+    echo "This will remove all current running crontab jobs. Are you sure you wish to continue? [y/n]"
     read yes
     
     if [ $yes == "y" ]
