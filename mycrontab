@@ -382,9 +382,54 @@ edit_cron_jobs()
 # This function allows the user to delete all current tasks
 remove_cron_job()
 {
-    crontab -r
-    sleep 3
-    clear
+    echo "                                 ${RED}.i;;;;i."
+    echo "                               iYcviii;vXY:"
+    echo "                             .YXi       .i1c."
+    echo "                            .YC.     ${RESET}.${RED}    in7."
+    echo "                           .vc.   ${RESET}......   ${RED};1c."
+    echo "                           i7,   ${RESET}..        ${RED}.;1;"
+    echo "                          i7,   ${RESET}.. ...      ${RED}.Y1i"
+    echo "                         ,7v     ${RESET}.${YELLOW}6MMM@;     ${RED}.YX,"
+    echo "                        .7;.   ${RESET}..${YELLOW}IMMMMMM1     ${RED}:t7."
+    echo "                       .;Y.     ${RESET}${YELLOW};\$MMMMMM9.     ${RED}:tc."
+    echo "                       vY.   ${RESET}.. ${YELLOW}.nMMM@MMU.      ${RED};1v."
+    echo "                      i7i   ${RESET}...  ${YELLOW}.#MM@M@C. ${RESET}.....${RED}:71i"
+    echo "                     it:   ${RESET}....   ${YELLOW}\$MMM@9;${RESET}.,i;;;i,${RED};tti"
+    echo "                    :t7.  ${RESET}.....   ${YELLOW}0MMMWv${RESET}.,iii:::,,${RED};St."
+    echo "                   .nC.   ${RESET}.....   ${YELLOW}IMMMQ${RESET}..,::::::,.${RED},czX."
+    echo "                  .ct:   ${RESET}....... ${YELLOW}.ZMMMI${RESET}..,:::::::,,${RED}:76Y."
+    echo "                  c2:   ${RESET}......,i..${YELLOW}Y\$M@t${RESET}..:::::::,,..${RED}inZY"
+    echo "                 vov   ${RESET}......:ii..${YELLOW}c\$MBc${RESET}..,,,,,,,,,,..${RED}iI9i"
+    echo "                i9Y   ${RESET}......iii:..${YELLOW}7@MA,${RESET}..,,,,,,,,,....${RED};AA:"
+    echo "               iIS.  ${RESET}......:ii::..${YELLOW};@MI${RESET}....,............${RED};Ez."
+    echo "              .I9.  ${RESET}......:i::::...${YELLOW}8M1${RESET}..................${RED}C0z."
+    echo "             .z9;  ${RESET}......:i::::,.. ${YELLOW}.i:${RESET}...................${RED}zWX."
+    echo "             vbv  ${RESET}......,i::::,,.      ................. ${RED}:AQY"
+    echo "            c6Y.  ${RESET}.,...,::::,,..${YELLOW}:t0@@QY. ${RESET}................ ${RED}:8bi"
+    echo "           :6S. ${RESET}..,,...,:::,,,..${YELLOW}EMMMMMMI. ${RESET}............... .${RED};bZ,"
+    echo "          :6o,  ${RESET}.,,,,..:::,,,..${YELLOW}i#MMMMMM#v${RESET}.................  ${RED}YW2."
+    echo "         .n8i ${RESET}..,,,,,,,::,,,,.. ${YELLOW}tMMMMM@C:${RESET}.................. ${RED}.1Wn"
+    echo "         7Uc. ${RESET}.:::,,,,,::,,,,..   ${YELLOW}i1t;${RESET},..................... ${RED}.UEi"
+    echo "         7C.${RESET}..::::::::::::,,,,..        ....................  ${RED}vSi."
+    echo "         ;1;${RESET}...,,::::::,.........       ..................    ${RED}Yz:"
+    echo "          v97,${RESET}.........                                     ${RED}.voC."
+    echo "           izAotX7777777777777777777777777777777777777777Y7n92:"
+    echo "             .;CoIIIIIUAA666666699999ZZZZZZZZZZZZZZZZZZZZ6ov.${RESET}"
+
+
+    # Validation the user wishes to continue with wiping all cron jobs.
+    error "This will remove all current running crontab jobs. Are you sure you wish to continue? [y/n]"
+    read yes
+    
+    if [ $yes == "y" ]
+    then 
+        crontab -r
+        error "All crontab jobs have been removed."
+        sleep 3
+        clear
+    else
+        clear
+    fi
 }
 
 # This function allows the user to exit the program
