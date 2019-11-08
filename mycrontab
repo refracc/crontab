@@ -131,8 +131,13 @@ list_running_tasks()
 edit_task()
 {
     crontab -l | grep . -n
-    echo "Select which line containing the task would you like to edit: "
-    read line
+    echo "Select which line conatining the task would you like to delete: "
+    unset line
+
+    while [[ ! ${line} =~ ^[0-9]+$ ]]; do
+        echo "Please enter in a number:"
+        read line
+    done
 
     crontab -l > output.txt
     sed -i.bak -e "${line}d" output.txt
@@ -359,14 +364,12 @@ remove_task()
 {
     crontab -l | grep . -n
     echo "Select which line conatining the task would you like to delete: "
-    read line
+    unset line
 
-    while [  $line | egrep -q '^[0-9]+$' ]
-    do
-        echo "Select which line conatining the task would you like to delete: "
+    while [[ ! ${line} =~ ^[0-9]+$ ]]; do
+        echo "Please enter in a number:"
         read line
     done
-
 
     crontab -l > output.txt
     sed -i.bak -e "${line}d" output.txt
