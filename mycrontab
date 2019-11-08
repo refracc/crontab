@@ -348,8 +348,8 @@ insert_task()
 
     clear
 
-    crontab -l > output.txt 
-    echo "$task" >> output.txt 
+    crontab -l > output.txt
+    echo "$task" >> output.txt
     crontab output.txt
     rm -f output.txt
 
@@ -363,13 +363,8 @@ insert_task()
 remove_task()
 {
     crontab -l | grep . -n
-    echo "Select which line conatining the task would you like to delete: "
-    unset line
-
-    while [[ ! ${line} =~ ^[0-9]+$ ]]; do
-        echo "Please enter in a number:"
-        read line
-    done
+    echo "Select which line containing the task would you like to delete: "
+    read line
 
     crontab -l > output.txt
     sed -i.bak -e "${line}d" output.txt
@@ -378,7 +373,7 @@ remove_task()
     rm -f *.bak
 
     sleep 3
-    clear    
+    clear
 }
 
 # This function is to let the user edit all of the tasks
@@ -430,7 +425,7 @@ remove_cron_job()
     # Validation the user wishes to continue with wiping all cron jobs.
     echo "This will remove all current running crontab jobs. Are you sure you wish to continue? [y/n]"
     read yes
-    
+
     if [ $yes == "y" ]
     then 
         crontab -r
