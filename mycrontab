@@ -451,7 +451,7 @@ remove_task()
     echo "Select which line conatining the task would you like to delete: "
     unset line
 
-    while [[ ! ${line} =~ ^[0-9]+$ ]]; do
+    while [[ grep -i ^[0-9]+$ ${line} ]]; do
         error "I dont recognise this number"
         echo "Please enter in a number:"
         read line
