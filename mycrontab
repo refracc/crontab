@@ -132,19 +132,21 @@ edit_task()
 {
     crontab -l | grep . -n
     echo "Select which line conatining the task would you like to delete: "
-    unset line
+    read line
 
-    while [[ ! ${line} =~ ^[0-9]+$ ]]; do
-        echo "Please enter in a number:"
-        read line
-    done
+    case $line in
+    ''|*[!0-9]*) error "Please enter a numeric value"
+    edit_task;;
+    *) echo "Line accepted";;
+    esac
+
 
     crontab -l > output.txt
     sed -i.bak -e "${line}d" output.txt
     crontab output.txt
     rm -f output.txt
 
-    insert_task
+    special_string
 }
 
 #Input validation function for insert_task()
@@ -449,13 +451,13 @@ remove_task()
 {
     crontab -l | grep . -n
     echo "Select which line conatining the task would you like to delete: "
-    unset line
+    read line
 
-    while [[ grep -i ^[0-9]+$ ${line} ]]; do
-        error "I dont recognise this number"
-        echo "Please enter in a number:"
-        read line
-    done
+    case $line in
+    ''|*[!0-9]*) error "Please enter a numeric value"
+    remove_task;;
+    *) echo "Line accepted";;
+    esac
 
     crontab -l > output.txt
     sed -i.bak -e "${line}d" output.txt
@@ -464,7 +466,7 @@ remove_task()
     rm -f *.bak
 
     sleep 3
-    clear    
+    clear
 }
 
 # This function is to let the user edit all of the tasks
