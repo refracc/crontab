@@ -1,0 +1,14 @@
+# m h  dom mon dow   command
+4 4 * * * cat %lalalalalala%lalalalalal%lalalalal
+* 4 4 4 4 ls -a -b -c
+40 14 26 5 6 ls -l
+59 14 31 * 0 whoami
+#every yearO5B
+@yearly ls
+0-59/10 0 1 1 0 whoami
+#every day
+4,5-45/3 22,23 2-23 1-5/2 0-5,Sat date
+* * * 12 * ls "hello        my love"
+*/2,*/3,*/5 */4,*/3 */12,*/5,*/3 */3,*/2 */4,*/3 ls "@ # $ ^ & * * ( ) "
+6 11 * * */3 cat lol.sh
+5,8-56/15 15 */4 4-8/2 * ls "**     **"
