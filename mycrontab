@@ -191,7 +191,7 @@ special_string()
     case $input in 
         1)
             echo "Please choose which special string you would like to use from this list:"
-            
+
             echo "+-----------+---------------+"
             echo "|   ${YELLOW}Value   ${RESET}|  ${YELLOW}Description  ${RESET}|"
             echo "+-----------+---------------+"
@@ -203,7 +203,7 @@ special_string()
             echo "|     6     |    Annually   |"
             echo "|     7     |     Yearly    |"
             echo "|     8     |     Reboot    |"
-            echo "+-----------+---------------+
+            echo "+-----------+---------------+"
 
             read value
 
@@ -455,7 +455,7 @@ remove_task()
     echo "Select which line conatining the task would you like to delete: "
     unset line
 
-    while [[ ! ${line} =~ ^[0-9]+$ ]]; do # If the number isn't numeric it will continually re-prompt the user.
+    while [[ ! ${line} =~ ^[0-9]+$ ]]; do
         echo "Please enter in a number:"
         read line
     done
