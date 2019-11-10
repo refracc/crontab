@@ -223,6 +223,22 @@ special_string()
                     special_string
                     ;;
             esac
+            clear
+            echo "Enter a command: "
+            read command
+            task="$task $command"
+
+            task = "$(echo -e "${task}" | sed -e 's/^[[:space:]]*//')"
+
+            crontab -l > output.txt 
+            echo "$task" >> output.txt 
+            crontab output.txt
+            rm -f output.txt
+
+            crontab -l
+
+            sleep 3
+            clear
             ;;
         2) 
             insert_task
