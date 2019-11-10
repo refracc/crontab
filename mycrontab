@@ -82,7 +82,7 @@ check_numeric()
             display_ui
             ;;
 	2)
-	    insert_task
+	    special_string
 	    display_ui
 	    ;;
 	3)
@@ -181,9 +181,68 @@ input_error()
     error "Illegal input, please enter a number between $1 and $2 or an asterisk"
 }
 
+
+
+special_string()
+{
+    echo "Would you like to use a special string (1=YES // 2=NO ): "
+    read input
+
+    case $input in 
+        1)
+            echo "Please choose which special string you would like to use from this list:"
+            read value
+
+            case $value in
+                1)
+                    task="@hourly"
+                    ;;
+                2)
+                    task="@midnight"
+                    ;;
+                3)
+                    task="@daily"
+                    ;;
+                4)
+                    task="@weekly"
+                    ;;
+                5)
+                    task="@monthly"
+                    ;;
+                6)
+                    task="@annually"
+                    ;;
+                7)
+                    task="@yearly"
+                    ;;
+                8)
+                    task="@reboot"
+                    ;;
+                *)
+                    error "I dont recognise this number!!"
+                    special_string
+                    ;;
+            esac
+            ;;
+        2) 
+            insert_task
+            ;;
+        *)
+            error "I dont recognise this number!!"
+            special_string
+            ;;
+    esac
+}
+
+
+
+
+
+
 # This function is to let the user insert a specific task
 insert_task()
 {
+
     task=""
     echo "+--------------+------------- +"
     echo "| ${YELLOW}Legal Values ${RESET}|  ${YELLOW}Description ${RESET}|"
@@ -348,8 +407,8 @@ insert_task()
 
     clear
 
-    crontab -l > output.txt
-    echo "$task" >> output.txt
+    crontab -l > output.txt 
+    echo "$task" >> output.txt 
     crontab output.txt
     rm -f output.txt
 
@@ -363,8 +422,13 @@ insert_task()
 remove_task()
 {
     crontab -l | grep . -n
-    echo "Select which line containing the task would you like to delete: "
-    read line
+    echo "Select which line conatining the task would you like to delete: "
+    unset line
+
+    while [[ ! ${line} =~ ^[0-9]+$ ]]; do
+        echo "Please enter in a number:"
+        read line
+    done
 
     crontab -l > output.txt
     sed -i.bak -e "${line}d" output.txt
@@ -373,7 +437,7 @@ remove_task()
     rm -f *.bak
 
     sleep 3
-    clear
+    clear    
 }
 
 # This function is to let the user edit all of the tasks
@@ -425,7 +489,7 @@ remove_cron_job()
     # Validation the user wishes to continue with wiping all cron jobs.
     echo "This will remove all current running crontab jobs. Are you sure you wish to continue? [y/n]"
     read yes
-
+    
     if [ $yes == "y" ]
     then 
         crontab -r
