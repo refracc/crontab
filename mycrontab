@@ -242,8 +242,6 @@ special_string()
             read command
             task="$task $command"
 
-            task = "$(echo -e "${task}" | sed -e 's/^[[:space:]]*//')"
-
             crontab -l > output.txt 
             echo "$task" >> output.txt 
             crontab output.txt
@@ -433,8 +431,6 @@ insert_task()
     read command
     task="$task $command"
 
-    task = "$(echo -e "${task}" | sed -e 's/^[[:space:]]*//')"
-
     clear
 
     crontab -l > output.txt 
@@ -456,6 +452,7 @@ remove_task()
     unset line
 
     while [[ ! ${line} =~ ^[0-9]+$ ]]; do
+        error "I dont recognise this number"
         echo "Please enter in a number:"
         read line
     done
@@ -519,9 +516,9 @@ remove_cron_job()
     # Validation the user wishes to continue with wiping all cron jobs.
     echo "This will remove all current running crontab jobs. Are you sure you wish to continue? [y/n]"
     read yes
-    
-    if [ $yes == "y" ]
-    then 
+
+    if [ $yes="y" ]
+    then
         crontab -r
         error "All crontab jobs have been removed."
         sleep 3
